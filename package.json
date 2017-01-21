@@ -1,0 +1,80 @@
+{
+  "name": "rollup-starter",
+  "amdName": "",
+  "version": "0.0.2",
+  "description": "",
+  "main": "dist/bundle.js",
+  "jsnext:main": "src/bundle.js",
+  "dev:main": "dist/bundle.dev.js",
+  "minified:main": "dist/bundle.min.js",
+  "scripts": {
+    "clean": "rimraf dist/",
+    "build": "npm-run-all clean transpile strip size",
+    "transpile": "rollup -c config/rollup.config.js -m dist/bundle.dev.js.map -f umd -n domobits src/index.js -o dist/bundle.js",
+    "optimize": "uglifyjs dist/bundle.dev.js -c conditionals=false,sequences=false,loops=false,join_vars=false,collapse_vars=false --pure-funcs=Object.defineProperty -b width=120,quote_style=3 -o dist/bundle.js -p relative --in-source-map dist/bundle.dev.js.map --source-map dist/bundle.js.map",
+    "minify": "uglifyjs dist/bundle.js -c evaluate,screw_ie8,unsafe,loops=false,keep_fargs=false,pure_getters,unused,dead_code -m -o dist/bundle.min.js -p relative --in-source-map dist/bundle.js.map --source-map dist/bundle.min.js.map",
+    "strip": "jscodeshift --run-in-band -s -t config/codemod-strip-tdz.js dist/bundle.js",
+    "size": "node -e \"process.stdout.write('gzip size: ')\" && gzip-size dist/bundle.js | pretty-bytes",
+    "test": "npm-run-all lint --parallel test:jest",
+    "test:jest": "jest",
+    "lint": "eslint src __test__",
+    "prepublish": "npm run build",
+    "smart-release": "npm run build && npm test && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish",
+    "release": "cross-env npm run smart-release"
+  },
+  "eslintConfig": {
+    "extends": "./config/eslint-config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/user/repo"
+  },
+  "files": [],
+  "keywords": [],
+  "author": "Nick Randall",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/user/repo/issues"
+  },
+  "homepage": "https://github.com/user/repo",
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.22.1",
+    "babel-eslint": "^7.1.1",
+    "babel-jest": "^18.0.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-react-jsx": "^6.22.0",
+    "babel-polyfill": "^6.22.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.22.0",
+    "babel-runtime": "^6.22.0",
+    "babel-style-autoprefix": "0.0.2",
+    "core-js": "^2.4.1",
+    "coveralls": "^2.11.15",
+    "cross-env": "^3.1.3",
+    "diff": "^3.0.0",
+    "eslint": "^3.0.0",
+    "eslint-plugin-react": "^6.0.0",
+    "gzip-size-cli": "^1.0.0",
+    "jest": "^18.1.0",
+    "jscodeshift": "^0.3.25",
+    "npm-run-all": "^4.0.0",
+    "pretty-bytes": "^4.0.2",
+    "rimraf": "^2.5.3",
+    "rollup": "^0.41.4",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-commonjs": "^7.0.0",
+    "rollup-plugin-memory": "^2.0.0",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-replace": "^1.1.1",
+    "uglify-js": "^2.7.5"
+  },
+  "jest": {
+    "collectCoverage": true
+  },
+  "dependencies": {
+    "glamor": "^2.20.22",
+    "preact": "^7.1.0",
+    "styled-components": "^1.3.1"
+  }
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Demo</title>
+		<script src="https://unpkg.com/skatejs-web-components/dist/index-with-deps.min.js"></script>
+	</head>
+	<body>
+		<x-domo-button>
+			<span>Hello World</span>
+		</x-domo-button>
+		<x-domo-button theme="alt">
+			<span>Alt theme</span>
+		</x-domo-button>
+		<x-domo-button theme="primary">
+			<span>Primary theme</span>
+		</x-domo-button>
+		<script src="/dist/bundle.js"></script>
+		<script>
+				var	buttons = document.querySelectorAll('x-domo-button');
+				console.log(buttons);
+				buttons.forEach(button => {
+					console.log(button);
+					button.addEventListener('custom', (e) => {
+						console.log('custom', e);
+					});
+				});
+		</script>
+	</body>
+</html>
