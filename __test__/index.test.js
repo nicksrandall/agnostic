@@ -1,14 +1,11 @@
-import Library from '../src/index.js';
+import 'babel-polyfill';
+import 'webcomponentsjs/lite';
 
-let lib;
+import Button from '../src/button';
 
-describe('Given an instance of my library', () => {
-  beforeEach(() => {
-    lib = new Library();
-  });
-  describe('when I need the name', () => {
-    it('should return the name', () => {
-      expect(lib.name).toEqual('Library');
-    });
+// write actual tests
+describe('Given an instance of this library', () => {
+  it('should init without failure', () => {
+    expect(Button).toEqual(Button);
   });
 });

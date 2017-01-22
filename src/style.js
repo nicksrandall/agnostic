@@ -1,4 +1,4 @@
-import { h } from 'preact/src/preact';
+import { h } from 'preact';
 
 export default (callSite = {}, ...substitutions) => {
   let template;
@@ -17,10 +17,10 @@ export default (callSite = {}, ...substitutions) => {
     return substitutions[i - 1] ? substitutions[i - 1] + chunk : chunk;
   }).join('');
 
-  return ({children}) => (
-		<span>
-			<style>{css}</style>
-			{children}
-		</span>
-	);
+  return ({ children }) => (
+    <span>
+      <style>{css}</style>
+      {children}
+    </span>
+  );
 };

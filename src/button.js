@@ -1,4 +1,4 @@
-import { h, Component } from 'preact/src/preact';
+import { h, Component } from 'preact';
 import register from './register';
 import css from './style';
 
@@ -92,18 +92,26 @@ export default class Button extends Component {
     const event = new Event('custom');
     this.emit(event);
   }
-  render({tabindex = '1', theme = 'default', children}) {
+  render({ tabindex = '1', theme = 'default', children }) {
     return (
-			<Styled>
-				<button class='button' theme={theme} tabindex={tabindex} onClick={this.clickHandler}>
-					{children}
-				</button>
-			</Styled>
+      <Styled>
+        <button
+          class="button"
+          theme={theme}
+          tabindex={tabindex}
+          onClick={this.clickHandler}
+        >
+          {children}
+        </button>
+      </Styled>
     );
   }
 }
 
 function createdCallback() {
+  // this is the actual DOM element
+  // it could be used to run native dom commands or
+  // to setup and api for your component
   this._vdomComponent.prototype.emit = this.dispatchEvent.bind(this);
 }
 
