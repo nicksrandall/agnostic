@@ -15,12 +15,10 @@
 		<x-domo-button theme="primary">
 			<span>Primary theme</span>
 		</x-domo-button>
-		<script src="/dist/bundle.js"></script>
+		<script src="/dist/bundle.min.js"></script>
 		<script>
 				var	buttons = document.querySelectorAll('x-domo-button');
-				console.log(buttons);
 				buttons.forEach(button => {
-					console.log(button);
 					button.addEventListener('custom', (e) => {
 						console.log('custom', e);
 					});

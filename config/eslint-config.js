@@ -6,8 +6,8 @@ module.exports = {
 	],
 	env: {
 		browser: true,
-		mocha: true,
 		node: true,
+		jest: true,
 		es6: true
 	},
 	parserOptions: {
@@ -15,10 +15,6 @@ module.exports = {
 			modules: true,
 			jsx: true
 		}
-	},
-	globals: {
-		sinon: true,
-		expect: true
 	},
 	rules: {
 		'react/jsx-uses-react': 2,
@@ -30,8 +26,8 @@ module.exports = {
 		semi: 2,
 		camelcase: 0,
 		'comma-style': 2,
-		'comma-dangle': [2, 'never'],
-		indent: [2, 'tab', {SwitchCase: 1}],
+		'comma-dangle': [2, 'only-multiline'],
+		indent: ['error', 2],
 		'no-mixed-spaces-and-tabs': [2, 'smart-tabs'],
 		'no-trailing-spaces': [2, { skipBlankLines: true }],
 		'max-nested-callbacks': [2, 3],
