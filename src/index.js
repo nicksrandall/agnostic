@@ -1,3 +1,3 @@
-import Button from './button';
+import './button';
+import './modal';
 
-export default { Button };

@@ -6,23 +6,29 @@
 		<script src="https://unpkg.com/webcomponentsjs@1.0.2"></script>
 	</head>
 	<body>
-		<x-domo-button>
-			<span>Hello World</span>
-		</x-domo-button>
-		<x-domo-button theme="alt">
-			<span>Alt theme</span>
-		</x-domo-button>
 		<x-domo-button theme="primary">
-			<span>Primary theme</span>
+			<span>Open Modal</span>
 		</x-domo-button>
+    <x-domo-modal>
+      <x-domo-modal-title>
+        <h2>Modal Title</h2>
+      </x-domo-modal-title>
+      <x-domo-modal-body>
+        <p>Modal Body</p>
+      </x-domo-modal-body>
+      <x-domo-modal-footer>
+        <h3>Modal Footer</h3>
+      </x-domo-modal-footer>
+    </x-domo-modal>
 		<script src="/dist/bundle.min.js"></script>
 		<script>
-				var	buttons = document.querySelectorAll('x-domo-button');
-				Array.from(buttons).forEach(button => {
-					button.addEventListener('custom', (e) => {
-						console.log('custom', e);
-					});
-				});
+				var	button = document.querySelector('x-domo-button');
+		    var modal = document.querySelector('x-domo-modal');
+
+        // using a custom event just to show that I can do that.
+        button.addEventListener('custom', (e) => {
+          modal.open();
+        });
 		</script>
 	</body>
 </html>

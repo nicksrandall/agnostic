@@ -13,7 +13,7 @@
     "transpile": "rollup -c config/rollup.config.js -m dist/bundle.dev.js.map -f umd -n domobits src/index.js -o dist/bundle.dev.js",
     "optimize": "uglifyjs dist/bundle.dev.js -c conditionals=false,sequences=false,loops=false,join_vars=false,collapse_vars=false --pure-funcs=Object.defineProperty -b width=120,quote_style=3 -o dist/bundle.js -p relative --in-source-map dist/bundle.dev.js.map --source-map dist/bundle.js.map",
     "minify": "uglifyjs dist/bundle.js -c evaluate,screw_ie8,unsafe,loops=false,keep_fargs=false,pure_getters,unused,dead_code -m -o dist/bundle.min.js -p relative --in-source-map dist/bundle.js.map --source-map dist/bundle.min.js.map",
-    "strip": "jscodeshift --run-in-band -s -t config/codemod-strip-tdz.js dist/bundle.js",
+    "strip": "jscodeshift --run-in-band -s -t config/codemod-strip-tdz.js dist/bundle.dev.js",
     "format": "prettier src/**/*.js __test__/**/*.js --write --single-quote --trailing-comma",
     "size": "node -e \"process.stdout.write('gzip size: ')\" && gzip-size dist/bundle.js | pretty-bytes",
     "test": "npm-run-all lint --parallel test:jest",
@@ -76,6 +76,7 @@
     "collectCoverage": true
   },
   "dependencies": {
-    "preact": "^7.1.0"
+    "preact": "^7.1.0",
+    "preact-portal": "^1.1.1"
   }
 }
