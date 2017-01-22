@@ -25,83 +25,86 @@ const Styled = css`
 	padding: 9px 12px 8px 12px;
 	font-size: 12px;
 	min-width: auto;
-}
-.button::before {
-	transform: scale(0);
-	transform-origin: center center;
-	background: #000;
-	border-radius: 50%;
-	content: "";
-	height: 100px;
-	left: 50%;
-	margin-left: -50px;
-	margin-top: -50px;
-	opacity: .1;
-	position: absolute;
-	top: 50%;
-	width: 100px;
-}
-.button:focus::before {
-	transform: scale(1);
-	z-index: -1000;
-	opacity: 0;
-	transition: -webkit-transform .3s ease-out, transform .3s ease-out, opacity .6s ease-out;
-}
-.button:hover {
-	background-color: #f8f8f8;
-}
-.button:active {
-	background-color: #e6e6e6;
+
+	&:hover {
+		background-color: #f8f8f8;
+	}
+	&:active {
+		background-color: #e6e6e6;
+	}
+
+	&::before {
+		transform: scale(0);
+		transform-origin: center center;
+		background: #000;
+		border-radius: 50%;
+		content: "";
+		height: 100px;
+		left: 50%;
+		margin-left: -50px;
+		margin-top: -50px;
+		opacity: .1;
+		position: absolute;
+		top: 50%;
+		width: 100px;
+	}
+	&:focus::before {
+		transform: scale(1);
+		z-index: -1000;
+		opacity: 0;
+		transition: -webkit-transform .3s ease-out, transform .3s ease-out, opacity .6s ease-out;
+	}
 }
 
 .button[theme="alt"] {
 	color: rgba(0,0,0,0.6);
 	border-color: transparent;
 	background-color: transparent;
-}
-.button[theme="alt"]:hover {
-	background-color: #f8f8f8;
-}
-.button[theme="alt"]:active {
-	background-color: #e6e6e6;
+
+	&:hover {
+		background-color: #f8f8f8;
+	}
+	&:active {
+		background-color: #e6e6e6;
+	}
 }
 
 .button[theme="primary"] {
 	color: white;
 	border-color: #fc9927;
 	background-color: #fc8f13;
-}
-.button[theme="primary"]:hover {
-	background-color: #fc8f13;
-}
-.button[theme="primary"]:active {
-	background-color: #ed8003;
+
+	&:hover {
+		background-color: #fc8f13;
+	}
+	&:active {
+		background-color: #ed8003;
+	}
 }
 `;
 
 export default class Button extends Component {
-	constructor(...args) {
-		super(...args);
-		this.clickHandler = this.clickHandler.bind(this);
-	}
-	clickHandler(e) {
-		const event = new Event('custom');
-		console.log(event);
-		this.emit(event);
-	}
-	render({tabindex = '1', theme = 'default', children}, state) {
-		return (
+  constructor(...args) {
+    super(...args);
+    this.clickHandler = this.clickHandler.bind(this);
+  }
+  clickHandler() {
+    const event = new Event('custom');
+    this.emit(event);
+  }
+  render({tabindex = '1', theme = 'default', children}) {
+    return (
 			<Styled>
 				<button class='button' theme={theme} tabindex={tabindex} onClick={this.clickHandler}>
 					{children}
 				</button>
 			</Styled>
-		);
-	}
+    );
+  }
 }
 
 function createdCallback() {
-	this._vdomComponent.prototype.emit = this.dispatchEvent.bind(this);
+  this._vdomComponent.prototype.emit = this.dispatchEvent.bind(this);
 }
 
 register(Button, 'x-domo-button', createdCallback);

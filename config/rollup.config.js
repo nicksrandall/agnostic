@@ -31,8 +31,7 @@ export default {
 				'babel-style-autoprefix',
 				["transform-react-jsx", { "pragma":"h" }]
 			],
-			exclude: 'node_modules/**',
-			"sourceMap": false,
+			"sourceMap": true,
 		})
 	]
 };
