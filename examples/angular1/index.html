@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+	<head>
+		<meta charset="UTF-8">
+		<title>Demo</title>
+		<script src="https://unpkg.com/webcomponentsjs@1.0.2"></script>
+		<script src="https://unpkg.com/jquery@3.1.1"></script>
+		<script src="https://unpkg.com/angular@1.6.1/angular.js"></script>
+	</head>
+	<body ng-cloak>
+    <div ng-controller="AppCtrl as $ctrl">
+      <x-domo-button theme="primary" ng-click="$ctrl.open()">
+        <span>Open Modal</span>
+      </x-domo-button>
+      <x-domo-modal on-close="$ctrl.onClose()" ng-attr-open="{{$ctrl.isOpen}}">
+        <x-domo-modal-title>
+          <h2>Modal Title</h2>
+        </x-domo-modal-title>
+        <x-domo-modal-body>
+          <p>Modal Body</p>
+        </x-domo-modal-body>
+        <x-domo-modal-footer>
+          <h3>Modal Footer</h3>
+        </x-domo-modal-footer>
+      </x-domo-modal>
+    </div>
+		<script src="/dist/bundle.min.js"></script>
+		<script>
+		  var module = angular.module('demo', []);
+      module.controller('AppCtrl', function() {
+        var $ctrl = this;
+        $ctrl.onClose = function() {
+          $ctrl.isOpen = false;
+        };
+        $ctrl.open = function() {
+          $ctrl.isOpen = true;
+        };
+      });
+
+      module.directive('onClose', function() {
+        return {
+          restrict: 'A',
+          scope: {
+            onClose: '&',
+          },
+          link: function(scope, elem) {
+            elem.on('close', function() {
+              scope.$apply(scope.onClose);
+            });
+          }
+        }
+      })
+		</script>
+	</body>
+</html>

@@ -55,13 +55,20 @@ const ModalWrapper = css`
 `;
 
 export class Modal extends Component {
+  onClose() {
+    this.close()
+    this.dispatchEvent(new Event('close'));
+  }
+  stop(e) {
+    e.stopPropagation();
+  }
   render ({ open, children }) {
-    return open ? (
+    return open && open != 'false' ? (
       <Portal into="body">
         <ModalWrapper>
-          <div class='modal-background'>
-            <div class='modal'>
-              <span class='close' onClick={this.close}>&times;</span>
+          <div class='modal-background' onClick={::this.onClose}>
+            <div class='modal' onClick={::this.stop}>
+              <span class='close' onClick={::this.onClose}>&times;</span>
               {children}
             </div>
           </div>
@@ -79,6 +86,7 @@ function setupModal() {
     this.setAttribute('open', '');
   };
 
+  this._vdomComponent.prototype.dispatchEvent = this.dispatchEvent.bind(this);
   this._vdomComponent.prototype.close = this.close;
 }
 

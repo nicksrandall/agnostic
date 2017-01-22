@@ -28,6 +28,7 @@ export default {
 				["es2015", { "loose": true, "modules": false }]
 			],
 			plugins: [
+        'transform-function-bind',
 				'babel-style-autoprefix',
 				["transform-react-jsx", { "pragma":"h" }]
 			],

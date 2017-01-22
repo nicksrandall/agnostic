@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Demo</title>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+		<script src="https://unpkg.com/webcomponentsjs@1.0.2"></script>
+		<script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
+		<script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+	</head>
+  <body>
+    <div id="root"></div>
+    <script src="/dist/bundle.min.js"></script>
+    <script type="text/babel" data-presets="es2015,react">
+      class App extends React.Component {
+        constructor(props) {
+          super(props)
+          this.state = {
+            isOpen: false
+          };
+          this.clickHandler = this.clickHandler.bind(this);
+          this.closeHandler = this.closeHandler.bind(this);
+        }
+        componentDidMount() {
+          this.modal.addEventListener('close', () => this.closeHandler(), false);
+        }
+        clickHandler() {
+          this.setState({isOpen: true});
+        }
+        closeHandler() {
+          this.setState({isOpen: false});
+        }
+        render() {
+          var modalAttrs = {};
+          if (this.state.isOpen) {
+            modalAttrs.open = 'open';
+          }
+          return (
+            <div>
+              <x-domo-button theme="primary" onClick={this.clickHandler}>
+                <span>Open Modal</span>
+              </x-domo-button>
+              <x-domo-modal {...modalAttrs} ref={(modal) => { this.modal = modal; }}>
+                <x-domo-modal-title>
+                  <h2>Modal Title</h2>
+                </x-domo-modal-title>
+                <x-domo-modal-body>
+                  <p>Modal Body</p>
+                </x-domo-modal-body>
+                <x-domo-modal-footer>
+                  <h3>Modal Footer</h3>
+                </x-domo-modal-footer>
+              </x-domo-modal>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(
+        <App />,
+        document.getElementById('root')
+      );
+    </script>
+	</body>
+</html>

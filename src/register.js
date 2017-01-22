@@ -39,9 +39,11 @@ function toVdom(element, nodeName) {
     i = 0,
     a = element.attributes,
     cn = element.childNodes;
-  for (i = a.length; i--; )
-    props[a[i].name] = a[i].value === "" ? true : a[i].value;
-  for (i = cn.length; i--; )
+  for (i = a.length; i--; ) {
+    props[a[i].name] = a[i].value === '' ? a[i].name : a[i].value;
+  }
+  for (i = cn.length; i--; ) {
     children[i] = toVdom(cn[i]);
+  }
   return h(nodeName || element.nodeName.toLowerCase(), props, children);
 }
