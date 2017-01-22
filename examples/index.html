@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Demo</title>
-		<script src="https://unpkg.com/skatejs-web-components/dist/index-with-deps.min.js"></script>
+		<script src="https://unpkg.com/webcomponentsjs@1.0.2"></script>
 	</head>
 	<body>
 		<x-domo-button>
@@ -18,7 +18,7 @@
 		<script src="/dist/bundle.min.js"></script>
 		<script>
 				var	buttons = document.querySelectorAll('x-domo-button');
-				buttons.forEach(button => {
+				Array.from(buttons).forEach(button => {
 					button.addEventListener('custom', (e) => {
 						console.log('custom', e);
 					});
