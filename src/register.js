@@ -32,18 +32,26 @@ function unRenderElement() {
 }
 
 function toVdom(element, nodeName) {
-  if (element.nodeType === 3) return element.nodeValue;
-  if (element.nodeType !== 1) return null;
-  let children = [],
-    props = {},
-    i = 0,
-    a = element.attributes,
-    cn = element.childNodes;
-  for (i = a.length; i--; ) {
+  if (element.nodeType === 3) {
+    return element.nodeValue;
+  }
+
+  if (element.nodeType !== 1) {
+    return null;
+  }
+
+  const children = [];
+  const props = {};
+  const a = element.attributes;
+  const cn = element.childNodes;
+
+  for (let i = 0; i < a.length; i++) {
     props[a[i].name] = a[i].value === '' ? a[i].name : a[i].value;
   }
-  for (i = cn.length; i--; ) {
-    children[i] = toVdom(cn[i]);
+
+  for (let i = 0; i < cn.length; i++) {
+    children[i] = toVdom(cn[i]) || null;
   }
+
   return h(nodeName || element.nodeName.toLowerCase(), props, children);
 }

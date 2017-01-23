@@ -2,7 +2,7 @@ import { h, Component } from 'preact';
 import register from './register';
 import css from './style';
 
-const Styled = css`
+const ButtonWrapper = css`
 .button {
 	border-radius: 3px;
 	cursor: pointer;
@@ -84,26 +84,23 @@ const Styled = css`
 `;
 
 export default class Button extends Component {
-  constructor(...args) {
-    super(...args);
-    this.clickHandler = this.clickHandler.bind(this);
-  }
   clickHandler() {
     const event = new Event('custom');
     this.emit(event);
   }
-  render({ tabindex = '1', theme = 'default', children }) {
+  render(props) {
+    const { tabindex = '1', theme = 'default', children } = props;
     return (
-      <Styled>
+      <ButtonWrapper>
         <button
           class="button"
           theme={theme}
           tabindex={tabindex}
-          onClick={this.clickHandler}
+          onClick={::this.clickHandler}
         >
           {children}
         </button>
-      </Styled>
+      </ButtonWrapper>
     );
   }
 }

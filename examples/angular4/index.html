@@ -15,18 +15,16 @@
     <script src="https://unpkg.com/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js"></script>
 	</head>
 	<body>
-    <my-app></my-app>
+    <demo-app>Loading...</demo-app>
 		<script src="/dist/bundle.min.js"></script>
 		<script>
       (function(app) {
         app.AppComponent = ng.core.Component({
-          selector: 'my-app',
+          selector: 'demo-app',
           template: `
-          <div>
-            <x-domo-button theme="primary" (click)="open()" >
+            <x-domo-button #button [attr.render]="true" theme="primary">
               <span>Open Modal</span>
             </x-domo-button>
-
             <x-domo-modal #modal [attr.open]="isOpen ? true : null">
               <x-domo-modal-title>
                 <h2>Modal Title</h2>
@@ -38,24 +36,25 @@
                 <h3>Modal Footer</h3>
               </x-domo-modal-footer>
             </x-domo-modal>
-          </div>
           `,
           queries: {
-            modal: new ng.core.ViewChild('modal')
+            modal: new ng.core.ViewChild('modal'),
+            button: new ng.core.ViewChild('button')
           },
         })
         .Class({
           constructor: function() {
             this.isOpen = false;
-            this.open = function () {
-              this.isOpen = true;
-            };
           },
           ngOnInit: function() {
             var $ctrl = this;
+
             $ctrl.modal.nativeElement.addEventListener('close', function() {
-              console.log('close');
               $ctrl.isOpen = false;
+            }, false);
+
+            $ctrl.button.nativeElement.addEventListener('custom', function() {
+              $ctrl.isOpen = true
             }, false);
 
           }
@@ -63,21 +62,22 @@
 
         app.AppModule =
         ng.core.NgModule({
-          imports: [ ng.platformBrowser.BrowserModule ],
-          declarations: [ app.AppComponent ],
-          bootstrap: [ app.AppComponent ],
-          schemas: [ ng.core.CUSTOM_ELEMENTS_SCHEMA ]
+          imports: [ng.platformBrowser.BrowserModule],
+          declarations: [app.AppComponent],
+          schemas: [ng.core.CUSTOM_ELEMENTS_SCHEMA],
+          bootstrap: [app.AppComponent]
         })
         .Class({
           constructor: function() {}
         });
 
-        document.addEventListener('DOMContentLoaded', function() {
+        window.addEventListener('DOMContentLoaded', function() {
           ng.platformBrowserDynamic
             .platformBrowserDynamic()
             .bootstrapModule(app.AppModule);
         });
       })(window.app || (window.app = {}));
+      // ng.core.enableProdMode();
 		</script>
 	</body>
 </html>
