@@ -57,7 +57,7 @@
     "diff": "^3.0.0",
     "eslint": "^3.0.0",
     "eslint-plugin-react": "^6.0.0",
-    "gzip-size-cli": "^1.0.0",
+    "gzip-size-cli": "^2.0.0",
     "jest": "^18.1.0",
     "jscodeshift": "^0.3.25",
     "npm-run-all": "^4.0.0",

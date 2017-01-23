@@ -62,19 +62,17 @@ export class Modal extends Component {
   stop(e) {
     e.stopPropagation();
   }
-  render ({ open, children }) {
-    return open && open != 'false' ? (
-      <Portal into="body">
+  render({ open, children }) {
+    return open && open != 'false' ? <Portal into="body">
         <ModalWrapper>
-          <div class='modal-background' onClick={::this.onClose}>
-            <div class='modal' onClick={::this.stop}>
-              <span class='close' onClick={::this.onClose}>&times;</span>
+          <div class="modal-background" onClick={::this.onClose}>
+            <div class="modal" onClick={::this.stop}>
+              <span class="close" onClick={::this.onClose}>×</span>
               {children}
             </div>
           </div>
         </ModalWrapper>
-      </Portal>
-    ) : null;
+      </Portal> : null;
   }
 }
 
@@ -101,7 +99,7 @@ const TitleWrapper = css`
 `;
 export const ModalTitle = ({ children }) => (
   <TitleWrapper>
-    <div class='modal-title'>
+    <div class="modal-title">
       {children}
     </div>
   </TitleWrapper>
@@ -116,7 +114,7 @@ const BodyWrapper = css`
 `;
 export const ModalBody = ({ children }) => (
   <BodyWrapper>
-    <div class='modal-body'>{children}</div>
+    <div class="modal-body">{children}</div>
   </BodyWrapper>
 );
 
@@ -131,7 +129,7 @@ const FooterWrapper = css`
 `;
 export const ModalFooter = ({ children }) => (
   <FooterWrapper>
-    <div class='modal-footer'>{children}</div>
+    <div class="modal-footer">{children}</div>
   </FooterWrapper>
 );
 
