@@ -56,7 +56,7 @@ const ModalWrapper = css`
 
 export class Modal extends Component {
   onClose() {
-    this.close()
+    this.close();
     this.dispatchEvent(new Event('close'));
   }
   stop(e) {
