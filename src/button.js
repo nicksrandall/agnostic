@@ -29,6 +29,7 @@ const ButtonWrapper = css`
 	&:hover {
 		background-color: #f8f8f8;
 	}
+
 	&:active {
 		background-color: #e6e6e6;
 	}
@@ -48,38 +49,41 @@ const ButtonWrapper = css`
 		top: 50%;
 		width: 100px;
 	}
+
 	&:focus::before {
 		transform: scale(1);
 		z-index: -1000;
 		opacity: 0;
 		transition: -webkit-transform .3s ease-out, transform .3s ease-out, opacity .6s ease-out;
 	}
-}
 
-.button[theme="alt"] {
-	color: rgba(0,0,0,0.6);
-	border-color: transparent;
-	background-color: transparent;
+  &[theme="alt"] {
+    color: rgba(0,0,0,0.6);
+    border-color: transparent;
+    background-color: transparent;
 
-	&:hover {
-		background-color: #f8f8f8;
-	}
-	&:active {
-		background-color: #e6e6e6;
-	}
-}
+    &:hover {
+      background-color: #f8f8f8;
+    }
 
-.button[theme="primary"] {
-	color: white;
-	border-color: #fc9927;
-	background-color: #fc8f13;
+    &:active {
+      background-color: #e6e6e6;
+    }
+  }
 
-	&:hover {
-		background-color: #fc8f13;
-	}
-	&:active {
-		background-color: #ed8003;
-	}
+  &[theme="primary"] {
+    color: white;
+    border-color: #fc9927;
+    background-color: #fc8f13;
+
+    &:hover {
+      background-color: #fc8f13;
+    }
+
+    &:active {
+      background-color: #ed8003;
+    }
+  }
 }
 `;
 

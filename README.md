@@ -1,5 +1,5 @@
 # agnostic
-(tiny) framework agnostic components
+A (tiny) framework agnostic component library built with [preact](https://preactjs.com/) and [web components](https://www.webcomponents.org/).
 
 ## status
 POC
@@ -7,8 +7,10 @@ POC
 ## Concepts
 - components are registered as custom-elements (web components).
 - components are authored with preact.js (because it's tiny)
-- compile-time autoprefixing happens on css
+- compile-time autoprefixing and other postcss goodies happens for css
+
+## Why?
+I want to create a forward-leaning, framework agnostic way of developing reusable components to share across features/teams of large projects.
 
 ## Todo
-- CSS editor plugins
-- write examples in other frameworks (angular 1, react, angular N, vue, ect...)
+- CSS editor plugin(s)
